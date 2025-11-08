@@ -153,11 +153,11 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                     Client Layer (Browser)                   │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐   │
-│  │ Student  │  │Recruiter │  │  Admin   │  │  Public  │   │
-│  │Dashboard │  │Dashboard │  │Dashboard │  │  Pages   │   │
-│  └──────────┘  └──────────┘  └──────────┘  └──────────┘   │
+│                     Client Layer (Browser)                  │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐     │
+│  │ Student  │  │Recruiter │  │  Admin   │  │  Public  │     │
+│  │Dashboard │  │Dashboard │  │Dashboard │  │  Pages   │     │  
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘     │
 └─────────────────────────────────────────────────────────────┘
                             ↓ HTTPS
 ┌─────────────────────────────────────────────────────────────┐
@@ -179,11 +179,11 @@
 │  │  │  Views   │  │  Forms   │  │  URLs    │        │    │
 │  │  │ (Logic)  │  │(Validation)│ │(Routing) │        │    │
 │  │  └──────────┘  └──────────┘  └──────────┘        │    │
-│  │                                                      │    │
+│  │                                                    │  │
 │  │  ┌────────────────────────────────────────┐       │    │
 │  │  │       Business Logic Layer             │       │    │
 │  │  │  • Authentication & Authorization      │       │    │
-│  │  │  • Skill Matching Algorithm           │       │    │
+│  │  │  • Skill Matching Algorithm            │       │    │
 │  │  │  • Application Status Management       │       │    │
 │  │  │  • Email Notifications                │       │    │
 │  │  └────────────────────────────────────────┘       │    │
