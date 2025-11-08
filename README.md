@@ -298,14 +298,14 @@ User Request → URL Router → View → Business Logic → Model → Database
 ┌─────────────────────┐
 │  jobs_application   │
 │─────────────────────│
-│ • id (PK)          │
-│ • user_id (FK)     │
-│ • job_id (FK)      │
-│ • status           │
-│ • cover_letter     │
-│ • recruiter_notes  │
-│ • applied_at       │
-│ • updated_at       │
+│ • id (PK)           │
+│ • user_id (FK)      │
+│ • job_id (FK)       │
+│ • status            │
+│ • cover_letter      │
+│ • recruiter_notes   │
+│ • applied_at        │
+│ • updated_at        │
 └─────────────────────┘
 ```
 
