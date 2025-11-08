@@ -161,63 +161,63 @@
 └─────────────────────────────────────────────────────────────┘
                             ↓ HTTPS
 ┌─────────────────────────────────────────────────────────────┐
-│                   Presentation Layer                         │
-│  ┌────────────────────────────────────────────────────┐    │
-│  │         Django Templates (HTML/TailwindCSS)         │    │
-│  │  • Jinja2 Template Engine                           │    │
-│  │  • Component-based Design                           │    │
-│  │  • Responsive Layouts                               │    │
-│  └────────────────────────────────────────────────────┘    │
+│                   Presentation Layer                        │
+│  ┌────────────────────────────────────────────────────┐     │
+│  │         Django Templates (HTML/TailwindCSS)        │     │
+│  │  • Jinja2 Template Engine                          │     │
+│  │  • Component-based Design                          │     │
+│  │  • Responsive Layouts                              │     │
+│  └────────────────────────────────────────────────────┘     │
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
-│                   Application Layer                          │
-│  ┌────────────────────────────────────────────────────┐    │
-│  │              Django Application (MVT)               │    │
-│  │                                                      │    │
-│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐        │    │
-│  │  │  Views   │  │  Forms   │  │  URLs    │        │    │
-│  │  │ (Logic)  │  │(Validation)│ │(Routing) │        │    │
-│  │  └──────────┘  └──────────┘  └──────────┘        │    │
-│  │                                                    │  │
-│  │  ┌────────────────────────────────────────┐       │    │
-│  │  │       Business Logic Layer             │       │    │
-│  │  │  • Authentication & Authorization      │       │    │
-│  │  │  • Skill Matching Algorithm            │       │    │
-│  │  │  • Application Status Management       │       │    │
-│  │  │  • Email Notifications                │       │    │
-│  │  └────────────────────────────────────────┘       │    │
-│  └────────────────────────────────────────────────────┘    │
+│                   Application Layer                         │
+│  ┌────────────────────────────────────────────────────┐     │
+│  │              Django Application (MVT)              │     │
+│  │                                                    │     │
+│  │  ┌──────────┐  ┌────────────┐   ┌──────────┐       │     │
+│  │  │  Views   │  │  Forms     │   │  URLs    │       │     │
+│  │  │ (Logic)  │  │(Validation)│   │(Routing) │       │     │
+│  │  └──────────┘  └────────────┘   └──────────┘       │     │
+│  │                                                    │     │
+│  │  ┌────────────────────────────────────────┐        │     │
+│  │  │       Business Logic Layer             │        │     │
+│  │  │  • Authentication & Authorization      │        │     │
+│  │  │  • Skill Matching Algorithm            │        │     │
+│  │  │  • Application Status Management       │        │     │
+│  │  │  • Email Notifications                 │        │     │
+│  │  └────────────────────────────────────────┘        │     │
+│  └────────────────────────────────────────────────────┘     │
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
-│                    Data Access Layer                         │
-│  ┌────────────────────────────────────────────────────┐    │
-│  │              Django ORM (Models)                    │    │
-│  │                                                      │    │
-│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐        │    │
-│  │  │  User    │  │ Profile  │  │   Job    │        │    │
-│  │  │  Model   │  │  Model   │  │  Model   │        │    │
-│  │  └──────────┘  └──────────┘  └──────────┘        │    │
-│  │                                                      │    │
-│  │  ┌──────────┐                                      │    │
-│  │  │Application│                                      │    │
-│  │  │  Model   │                                      │    │
-│  │  └──────────┘                                      │    │
-│  └────────────────────────────────────────────────────┘    │
+│                    Data Access Layer                        │
+│  ┌────────────────────────────────────────────────────┐     │
+│  │              Django ORM (Models)                   │     │
+│  │                                                    │     │
+│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐          │     │
+│  │  │  User    │  │ Profile  │  │   Job    │          │     │
+│  │  │  Model   │  │  Model   │  │  Model   │          │     │
+│  │  └──────────┘  └──────────┘  └──────────┘          │     │
+│  │                                                    │     │
+│  │  ┌──────────┐                                      │     │
+│  │  │Application│                                     │     │
+│  │  │  Model   │                                      │     │
+│  │  └──────────┘                                      │     │
+│  └────────────────────────────────────────────────────┘     │
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
-│                    Database Layer                            │
-│  ┌────────────────────────────────────────────────────┐    │
-│  │         PostgreSQL / SQLite Database               │    │
-│  │                                                      │    │
-│  │  Tables:                                            │    │
-│  │  • auth_user                                       │    │
-│  │  • jobs_profile                                    │    │
-│  │  • jobs_job                                        │    │
-│  │  • jobs_application                                │    │
-│  └────────────────────────────────────────────────────┘    │
+│                    Database Layer                           │
+│  ┌────────────────────────────────────────────────────┐     │
+│  │         PostgreSQL / SQLite Database               │     │
+│  │                                                    │     │
+│  │  Tables:                                           │     │
+│  │  • auth_user                                       │     │
+│  │  • jobs_profile                                    │     │
+│  │  • jobs_job                                        │     │
+│  │  • jobs_application                                │     │
+│  └────────────────────────────────────────────────────┘     │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -241,14 +241,14 @@ User Request → URL Router → View → Business Logic → Model → Database
 ┌─────────────────────┐
 │      auth_user      │
 │─────────────────────│
-│ • id (PK)          │
-│ • username         │
-│ • email            │
-│ • password         │
-│ • first_name       │
-│ • last_name        │
-│ • is_active        │
-│ • date_joined      │
+│ • id (PK)           │
+│ • username          │
+│ • email             │
+│ • password          │
+│ • first_name        │
+│ • last_name         │
+│ • is_active         │
+│ • date_joined       │
 └─────────────────────┘
           │
           │ 1:1
@@ -256,20 +256,20 @@ User Request → URL Router → View → Business Logic → Model → Database
 ┌─────────────────────┐
 │    jobs_profile     │
 │─────────────────────│
-│ • id (PK)          │
-│ • user_id (FK)     │
-│ • role             │
-│ • phone            │
-│ • course           │
-│ • skills (JSON)    │
-│ • about            │
-│ • projects (JSON)  │
-│ • certifications   │
-│ • github_url       │
-│ • linkedin_url     │
-│ • portfolio_url    │
-│ • company_name     │
-│ • is_approved      │
+│ • id (PK)           │
+│ • user_id (FK)      │
+│ • role              │
+│ • phone             │
+│ • course            │
+│ • skills (JSON)     │
+│ • about             │
+│ • projects (JSON)   │
+│ • certifications    │
+│ • github_url        │
+│ • linkedin_url      │
+│ • portfolio_url     │
+│ • company_name      │
+│ • is_approved       │
 └─────────────────────┘
           │
           │ 1:N (for recruiters)
@@ -277,20 +277,20 @@ User Request → URL Router → View → Business Logic → Model → Database
 ┌─────────────────────┐
 │      jobs_job       │
 │─────────────────────│
-│ • id (PK)          │
-│ • posted_by (FK)   │
-│ • title            │
-│ • company          │
-│ • description      │
-│ • location         │
-│ • job_type         │
-│ • skills_required  │
-│   (JSON)           │
-│ • apply_link       │
-│ • last_date        │
-│ • views_count      │
-│ • created_at       │
-│ • updated_at       │
+│ • id (PK)           │
+│ • posted_by (FK)    │
+│ • title             │
+│ • company           │
+│ • description       │
+│ • location          │
+│ • job_type          │
+│ • skills_required   │
+│   (JSON)            │
+│ • apply_link        │
+│ • last_date         │
+│ • views_count       │
+│ • created_at        │
+│ • updated_at        │
 └─────────────────────┘
           │
           │ 1:N
