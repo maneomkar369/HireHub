@@ -1,5 +1,5 @@
 """
-WSGI config for campusconnect project.
+WSGI config for HireHub project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,9 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'campusconnect.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'HireHub.settings')
 
 application = get_wsgi_application()
+
+# Vercel serverless function handler
+app = application
