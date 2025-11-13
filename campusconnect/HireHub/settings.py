@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-u6-^ea_ma-b4#)4oh^&pn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', '.vercel.app', '.now.sh']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', '.vercel.app', '.now.sh', '.railway.app']
 
 
 # Application definition
@@ -75,12 +76,20 @@ WSGI_APPLICATION = 'HireHub.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# Default to SQLite for local development
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# Use PostgreSQL on Railway (when DATABASE_URL is set)
+if 'DATABASE_URL' in os.environ:
+    DATABASES['default'] = dj_database_url.config(
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
 
 
 # Password validation
