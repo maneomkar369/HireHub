@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout, update_session_auth_hash
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
@@ -98,14 +99,29 @@ def register(request):
 
 def login_view(request):
     if request.method == 'POST':
-        username = request.POST.get('username', '')
+        username_or_email = request.POST.get('username', '').strip()
         password = request.POST.get('password', '')
+        
+        # Check if input is an email
+        if '@' in username_or_email:
+            # Try to find user by email
+            try:
+                user_obj = User.objects.get(email=username_or_email)
+                username = user_obj.username
+            except User.DoesNotExist:
+                messages.error(request, 'Invalid email or password')
+                return render(request, 'jobs/login.html')
+        else:
+            username = username_or_email
+        
+        # Authenticate user
         user = authenticate(request, username=username, password=password)
         if user:
             login(request, user)
+            messages.success(request, f'Welcome back, {user.username}!')
             return redirect('home')
         else:
-            messages.error(request, 'Invalid credentials')
+            messages.error(request, 'Invalid credentials. Please check your username/email and password.')
     return render(request, 'jobs/login.html')
 
 def logout_view(request):

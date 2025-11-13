@@ -4,13 +4,30 @@ from django.contrib.auth.models import User
 from .models import Job, Profile
 
 class CustomUserCreationForm(UserCreationForm):
-    email = forms.EmailField(required=True)
+    email = forms.EmailField(
+        required=True,
+        widget=forms.EmailInput(attrs={
+            'class': 'block w-full pl-10 pr-3 py-2.5 sm:py-3 text-sm sm:text-base border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-200',
+            'placeholder': 'Enter your email address'
+        })
+    )
     role = forms.ChoiceField(choices=[('student', 'Student'), ('recruiter', 'Recruiter')], required=True)
     company_name = forms.CharField(max_length=200, required=False, help_text='Required for recruiters')
 
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if email:
+            # Check if email already exists
+            if User.objects.filter(email=email).exists():
+                raise forms.ValidationError('This email address is already registered. Please use a different email or try logging in.')
+            # Validate email format
+            if not '@' in email or not '.' in email.split('@')[-1]:
+                raise forms.ValidationError('Please enter a valid email address.')
+        return email
 
     def save(self, commit=True):
         user = super().save(commit=False)
