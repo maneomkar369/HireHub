@@ -62,7 +62,7 @@ class JobForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['course', 'about', 'github_url', 'linkedin_url', 'portfolio_url']
+        fields = ['course', 'about', 'github_url', 'linkedin_url', 'portfolio_url', 'resume']
         widgets = {
             'course': forms.TextInput(attrs={
                 'class': 'w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
@@ -84,6 +84,10 @@ class ProfileForm(forms.ModelForm):
             'portfolio_url': forms.URLInput(attrs={
                 'class': 'w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
                 'placeholder': 'https://yourportfolio.com'
+            }),
+            'resume': forms.FileInput(attrs={
+                'class': 'w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+                'accept': '.pdf,.doc,.docx,.txt'
             }),
         }
     

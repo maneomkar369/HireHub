@@ -129,11 +129,14 @@ def dashboard(request):
     saved_jobs = SavedJob.objects.filter(user=request.user).select_related('job')
     applied_jobs = Application.objects.filter(user=request.user).select_related('job').order_by('-applied_at')
     
-    # Get job recommendations based on skills
+    # Get job recommendations based on skills (including resume-extracted skills)
     recommended_jobs = []
+    resume_based_recommendations = []
+    
     if profile.skills:
         from django.db.models import Q
         from django.utils import timezone
+        from .resume_parser import ResumeParser
         
         # Find jobs that match user's skills and are still open
         all_jobs = Job.objects.filter(
@@ -143,16 +146,16 @@ def dashboard(request):
             application__user=request.user  # Exclude already applied jobs
         )
         
-        # Calculate match percentage and filter
-        for job in all_jobs:
-            match_percentage = profile.skill_match_percentage(job)
-            if match_percentage >= 30:  # At least 30% match
-                job.match_percentage = match_percentage
-                recommended_jobs.append(job)
+        # Get recommendations using resume parser
+        recommended_jobs = ResumeParser.get_job_recommendations(
+            profile.skills, 
+            all_jobs, 
+            limit=10
+        )
         
-        # Sort by match percentage
-        recommended_jobs.sort(key=lambda x: x.match_percentage, reverse=True)
-        recommended_jobs = recommended_jobs[:5]  # Top 5 recommendations
+        # Separate high-match recommendations (from resume)
+        if profile.resume:
+            resume_based_recommendations = [job for job in recommended_jobs if job.match_percentage >= 50]
     
     # Application status summary
     status_summary = {
@@ -168,6 +171,7 @@ def dashboard(request):
         'saved_jobs': saved_jobs,
         'applied_jobs': applied_jobs,
         'recommended_jobs': recommended_jobs,
+        'resume_based_recommendations': resume_based_recommendations,
         'status_summary': status_summary,
     })
 
@@ -175,14 +179,55 @@ def dashboard(request):
 def profile_update(request):
     profile, created = Profile.objects.get_or_create(user=request.user)
     if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=profile)
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
-            form.save()
+            profile = form.save(commit=False)
+            
+            # Handle resume upload and parsing
+            if 'resume' in request.FILES:
+                resume_file = request.FILES['resume']
+                
+                # Save the file temporarily to parse it
+                profile.resume = resume_file
+                profile.save()
+                
+                # Parse resume and extract skills
+                from .resume_parser import ResumeParser
+                import os
+                
+                file_path = profile.resume.path
+                file_extension = os.path.splitext(resume_file.name)[1]
+                
+                # Analyze resume
+                analysis = ResumeParser.analyze_resume(file_path, file_extension)
+                
+                # Store extracted text
+                profile.resume_text = analysis['text']
+                
+                # Merge extracted skills with existing skills
+                extracted_skills = analysis['skills']
+                if extracted_skills:
+                    # Combine with existing skills and remove duplicates
+                    existing_skills = set(skill.lower() for skill in profile.skills)
+                    new_skills = set(skill.lower() for skill in extracted_skills)
+                    combined_skills = existing_skills.union(new_skills)
+                    
+                    # Convert back to title case and save
+                    profile.skills = sorted([skill.title() for skill in combined_skills])
+                    
+                    messages.success(
+                        request, 
+                        f'Resume uploaded successfully! We found {len(extracted_skills)} skills: {", ".join(extracted_skills[:5])}{"..." if len(extracted_skills) > 5 else ""}'
+                    )
+                else:
+                    messages.info(request, 'Resume uploaded successfully! You can manually add your skills below.')
+            
+            profile.save()
             messages.success(request, 'Profile updated!')
             return redirect('dashboard')
     else:
         form = ProfileForm(instance=profile)
-    return render(request, 'jobs/profile_update.html', {'form': form})
+    return render(request, 'jobs/profile_update.html', {'form': form, 'profile': profile})
 
 @login_required
 def settings(request):

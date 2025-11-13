@@ -14,6 +14,9 @@ class Profile(models.Model):
     linkedin_url = models.URLField(blank=True, verbose_name='LinkedIn Profile')
     portfolio_url = models.URLField(blank=True, verbose_name='Portfolio Website')
     certifications = models.JSONField(default=list, blank=True, help_text='List of certifications')
+    # Resume field
+    resume = models.FileField(upload_to='resumes/', blank=True, null=True, verbose_name='Resume/CV')
+    resume_text = models.TextField(blank=True, help_text='Extracted text from resume for analysis')
 
     def __str__(self):
         return self.user.username

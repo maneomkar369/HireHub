@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'campusconnect.urls'
+ROOT_URLCONF = 'HireHub.urls'
 
 TEMPLATES = [
     {
@@ -67,7 +67,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'campusconnect.wsgi.application'
+WSGI_APPLICATION = 'HireHub.wsgi.application'
 
 
 # Database

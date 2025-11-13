@@ -5,94 +5,131 @@
 {% block extra_head %}
 <style>
 @media print {
-    /* Hide navigation and non-essential elements */
-    nav, header, .no-print, button:not(.print-keep), 
-    a[href*="mailto"]:not(.print-keep),
-    form, [x-show] {
+    /* STEP 1: Hide everything from base template */
+    .hide-print {
+         display: none !important;
+    }
+    header, nav, footer, aside {
         display: none !important;
     }
-    
-    /* Page setup */
+
+    /* STEP 2: Hide all page chrome - be more specific */
+    .min-h-screen > div:first-child,
+    .max-w-7xl > div:first-child,
+    .max-w-7xl > div:nth-child(2),
+    .max-w-7xl > div:nth-child(3),
+    .bg-white.shadow.rounded-lg.p-4.mb-6,
+    .bg-white.shadow.rounded-lg.p-6.mb-6 {
+        display: none !important;
+    }
+
+    /* STEP 3: Hide all interactive elements */
+    button,
+    input,
+    select,
+    textarea,
+    form,
+    .no-print,
+    [x-data] > div:last-child,
+    a[href*="recruiter_dashboard"],
+    a[href*="mailto"] {
+        display: none !important;
+    }
+
+    /* STEP 4: Hide status column elements - be more aggressive */
+    .print-resume-status,
+    .print-match-score,
+    .print-resume .flex.flex-col.items-end,
+    .print-resume .flex.flex-col.items-end *,
+    span[class*="bg-red-100"],
+    span[class*="bg-yellow-100"],
+    span[class*="bg-blue-100"],
+    span[class*="bg-green-100"],
+    div[class*="bg-red-100"],
+    div[class*="bg-yellow-100"],
+    div[class*="bg-blue-100"],
+    div[class*="bg-green-100"] {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    /* STEP 5: Hide action buttons section */
+    .print-resume .mt-8.pt-6.border-t-2,
+    .print-resume .mt-8.pt-6.border-t-2 * {
+        display: none !important;
+    }
+
+    /* STEP 6: Hide any remaining status-related elements */
+    .print-resume [class*="REJECTED"],
+    .print-resume [class*="PENDING"],
+    .print-resume [class*="ACCEPTED"],
+    .print-resume [class*="SHORTLISTED"],
+    .print-resume [class*="INTERVIEWED"] {
+        display: none !important;
+    }
+
+    /* STEP 7: Page setup */
     @page {
         size: A4;
-        margin: 0.5in;
+        margin: 0.75in;
     }
-    
+
     body {
+        margin: 0 !important;
+        padding: 0 !important;
         background: white !important;
         font-size: 11pt;
         line-height: 1.4;
-    }
-    
-    /* Reset colors for print */
-    * {
-        background: white !important;
         color: black !important;
-        box-shadow: none !important;
     }
-    
-    /* Resume container */
+
+    /* STEP 8: Resume container */
     .print-resume {
         page-break-inside: avoid;
         page-break-after: always;
-        margin-bottom: 0;
         border: 2px solid #333 !important;
-        padding: 20px;
-    }
-    
-    /* Header section */
-    .print-resume .bg-gradient-to-r {
-        background: #f5f5f5 !important;
-        border-bottom: 3px solid #333 !important;
         padding: 20px !important;
+        margin: 0 0 20px 0 !important;
+        background: white !important;
+        display: block !important;
     }
-    
-    /* Avatar - convert to initials only */
-    .print-resume .rounded-full {
-        background: #333 !important;
-        color: white !important;
-        border: 2px solid #333 !important;
-    }
-    
-    /* Name and contact */
+
+    /* STEP 9: Typography */
     .print-resume h2 {
         font-size: 24pt !important;
         font-weight: bold !important;
-        margin-bottom: 8px !important;
         color: #000 !important;
+        margin-bottom: 8px !important;
     }
-    
-    /* Section headers */
+
     .print-resume h3 {
         font-size: 14pt !important;
         font-weight: bold !important;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        color: #000 !important;
         margin-top: 15px !important;
         margin-bottom: 8px !important;
         padding-bottom: 4px !important;
         border-bottom: 2px solid #333 !important;
-        color: #000 !important;
     }
-    
-    /* Section content */
+
     .print-resume h4 {
         font-size: 12pt !important;
         font-weight: bold !important;
         color: #000 !important;
     }
-    
+
     .print-resume p,
     .print-resume span,
     .print-resume div {
         color: #333 !important;
         font-size: 10pt !important;
     }
-    
-    /* Skills badges */
-    .print-resume .px-4.py-2,
-    .print-resume .px-3.py-1,
-    .print-resume .px-2.py-1 {
+
+    /* STEP 10: Skills badges */
+    .print-resume .px-4,
+    .print-resume .px-3,
+    .print-resume .px-2 {
         border: 1px solid #333 !important;
         background: white !important;
         padding: 2px 6px !important;
@@ -100,109 +137,37 @@
         display: inline-block !important;
         border-radius: 3px !important;
     }
-    
-    /* Highlighted skills */
-    .print-resume .bg-green-100,
-    .print-resume .border-green-500 {
-        background: #e8e8e8 !important;
-        border: 2px solid #000 !important;
-        font-weight: bold !important;
-    }
-    
-    /* Project cards */
-    .print-resume .bg-gray-50 {
+
+    /* STEP 11: Remove all colors */
+    * {
         background: white !important;
-        border: 1px solid #333 !important;
-        padding: 10px !important;
-        margin-bottom: 8px !important;
+        box-shadow: none !important;
     }
-    
-    /* Status badge */
-    .print-resume-status {
-        border: 2px solid #333 !important;
-        padding: 5px 10px !important;
-        font-weight: bold !important;
-        background: white !important;
+
+    .print-resume .bg-gradient-to-r {
+        background: #f5f5f5 !important;
+        border-bottom: 2px solid #333 !important;
     }
-    
-    /* Match score */
-    .print-match-score {
-        border: 2px solid #333 !important;
-        padding: 8px !important;
-        text-align: center !important;
-        background: white !important;
+
+    .print-resume .rounded-full {
+        background: #333 !important;
+        color: white !important;
     }
-    
-    /* Portfolio links - show as text */
-    .print-resume a {
-        color: #000 !important;
-        text-decoration: none !important;
-        border-bottom: 1px solid #333 !important;
-    }
-    
-    .print-resume a:after {
-        content: " (" attr(href) ")";
-        font-size: 8pt !important;
-        color: #666 !important;
-    }
-    
-    /* Icons - hide in print */
+
+    /* STEP 12: Hide SVG icons */
     svg {
         display: none !important;
     }
-    
-    /* Dividers */
-    .print-resume .border-t,
-    .print-resume .border-b {
-        border-color: #333 !important;
+
+    /* STEP 13: Links styling */
+    .print-resume a {
+        color: #000 !important;
+        text-decoration: underline !important;
     }
     
-    /* Remove extra spacing */
-    .print-resume .space-y-6 > *,
-    .print-resume .space-y-4 > *,
-    .print-resume .space-y-3 > * {
-        margin-top: 8px !important;
-    }
-    
-    /* Contact info */
-    .print-contact {
-        font-size: 10pt !important;
-        line-height: 1.6 !important;
-    }
-    
-    /* Certification icons */
-    .print-resume .w-6.h-6 {
-        display: inline-block !important;
-        width: 12px !important;
-        height: 12px !important;
-    }
-    
-    /* Remove shadows and gradients */
-    .shadow, .shadow-sm, .shadow-md, .shadow-lg, .shadow-xl,
-    .shadow-2xl, .bg-gradient-to-r, .bg-gradient-to-br {
-        box-shadow: none !important;
-        background: white !important;
-    }
-    
-    /* Hide search/filter sections */
-    .bg-white.shadow.rounded-lg.p-4.mb-6 {
+    /* Hide other resume cards when printing */
+    .hide-print {
         display: none !important;
-    }
-    
-    /* Job details card - minimal print */
-    .bg-white.shadow.rounded-lg.p-6.mb-6 {
-        display: none !important;
-    }
-    
-    /* Back button */
-    a[href*="recruiter_dashboard"] {
-        display: none !important;
-    }
-    
-    /* Page title */
-    h1 {
-        font-size: 18pt !important;
-        margin-bottom: 5px !important;
     }
 }
 
@@ -368,8 +333,16 @@
                     </div>
                     
                     <!-- Portfolio Links -->
-                    {% if application.user.profile.github_url or application.user.profile.linkedin_url or application.user.profile.portfolio_url %}
+                    {% if application.user.profile.github_url or application.user.profile.linkedin_url or application.user.profile.portfolio_url or application.user.profile.resume %}
                     <div class="mt-4 pt-4 border-t border-gray-300 flex flex-wrap gap-3">
+                        {% if application.user.profile.resume %}
+                        <div class="inline-flex items-center px-3 py-1.5 bg-purple-100 text-purple-800 text-xs font-semibold rounded-md border-2 border-purple-300">
+                            <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            Resume Uploaded ✓
+                        </div>
+                        {% endif %}
                         {% if application.user.profile.github_url %}
                         <a href="{{ application.user.profile.github_url }}" target="_blank" 
                            class="inline-flex items-center px-3 py-1.5 bg-gray-900 text-white text-xs font-semibold rounded-md hover:bg-gray-800 transition-colors">
@@ -540,6 +513,18 @@
 
                     <!-- Action Buttons -->
                     <div class="mt-8 pt-6 border-t-2 border-gray-200 flex flex-wrap gap-3">
+                        <!-- Download Resume Button (if resume uploaded) -->
+                        {% if application.user.profile.resume %}
+                        <a href="{{ application.user.profile.resume.url }}" download 
+                           class="no-print inline-flex items-center px-6 py-3 bg-purple-600 text-white font-bold rounded-lg hover:bg-purple-700 transition-colors shadow-lg">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            Download Resume
+                        </a>
+                        {% endif %}
+                        
+                        <!-- Email Button -->
                         <a href="mailto:{{ application.user.email }}?subject=Application for {{ job.title }}&body=Dear {{ application.user.username }},%0D%0A%0D%0AThank you for your interest in the {{ job.title }} position at {{ job.company }}." 
                            class="no-print inline-flex items-center px-6 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition-colors shadow-lg">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -547,13 +532,17 @@
                             </svg>
                             Send Email
                         </a>
-                        <button onclick="window.print()" 
+                        
+                        <!-- Print Button -->
+                        <button data-print-resume
                                 class="no-print print-button inline-flex items-center px-6 py-3 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-800 transition-colors shadow-lg">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
                             </svg>
                             Print Resume
                         </button>
+                        
+                        <!-- GitHub Link -->
                         {% if application.user.profile.github_url %}
                         <a href="{{ application.user.profile.github_url }}" target="_blank" 
                            class="no-print inline-flex items-center px-6 py-3 bg-gray-900 text-white font-bold rounded-lg hover:bg-black transition-colors shadow-lg">
@@ -592,4 +581,42 @@
         </div>
     </div>
 </div>
+
+<script>
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Add event listeners to all print buttons
+    var printButtons = document.querySelectorAll('[data-print-resume]');
+    
+    printButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            printSingleResume(this);
+        });
+    });
+});
+
+function printSingleResume(button) {
+    var resumeCard = button.closest('.print-resume');
+
+    if (!resumeCard) return;
+
+    // Hide all other resume cards
+    document.querySelectorAll('.print-resume').forEach(function(card) {
+        if (card !== resumeCard) {
+            card.classList.add('hide-print');
+        }
+    });
+
+    // Print
+    window.print();
+
+    // Restore
+    setTimeout(function() {
+        document.querySelectorAll('.print-resume').forEach(function(card) {
+            card.classList.remove('hide-print');
+        });
+    }, 100);
+}
+
+</script>
 {% endblock %}
