@@ -17,6 +17,7 @@ Get HireHub up and running in 5 minutes!
 ```bash
 git clone https://github.com/yourusername/hirehub.git
 cd hirehub
+cd campusconnect
 ```
 
 ### 2️⃣ Create Virtual Environment
@@ -43,7 +44,6 @@ pip install -r requirements.txt
 ### 4️⃣ Set Up Database
 
 ```bash
-cd hirehub
 python manage.py migrate
 ```
 
@@ -130,20 +130,21 @@ python manage.py shell
 
 ```
 hirehub/
-├── hirehub/          # Project configuration
-│   ├── settings.py         # Settings
-│   ├── urls.py            # URL routing
-│   └── wsgi.py            # WSGI config
-├── jobs/                   # Main app
-│   ├── models.py          # Database models
-│   ├── views.py           # View logic
-│   ├── forms.py           # Form handling
-│   ├── urls.py            # App URLs
-│   └── templates/         # HTML templates
-├── static/                 # Static files (CSS, JS)
-├── media/                  # User uploads
-├── manage.py              # Django management
-└── requirements.txt       # Dependencies
+├── campusconnect/        # Django project configuration
+│   ├── settings.py       # Settings (campusconnect.settings)
+│   ├── urls.py           # URL routing
+│   ├── asgi.py           # ASGI config
+│   └── wsgi.py           # WSGI config
+├── jobs/                 # Main app
+│   ├── models.py         # Database models
+│   ├── views.py          # View logic
+│   ├── forms.py          # Form handling
+│   ├── urls.py           # App URLs
+│   └── templates/        # HTML templates
+├── static/               # Static files (CSS, JS)
+├── media/                # User uploads
+├── manage.py             # Django management
+└── requirements.txt      # Dependencies
 ```
 
 ---
