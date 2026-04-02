@@ -6,7 +6,7 @@ Get HireHub up and running in 5 minutes!
 
 - Python 3.8+ installed
 - Git installed
-- 10-15 minutes of your time ⏰
+- 5 minutes of your time ⏰
 
 ---
 

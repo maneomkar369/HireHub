@@ -32,19 +32,19 @@ Complete documentation guide for the HireHub project.
 
 ### I want to...
 
-**...install the project**
+**...install the project**  
 → Start with [QUICKSTART.md](QUICKSTART.md)
 
-**...understand the architecture**
+**...understand the architecture**  
 → Read [ARCHITECTURE.md](ARCHITECTURE.md)
 
-**...contribute code**
+**...contribute code**  
 → Check [CONTRIBUTING.md](CONTRIBUTING.md)
 
-**...see what's changed**
+**...see what's changed**  
 → Review [CHANGELOG.md](CHANGELOG.md)
 
-**...understand the features**
+**...understand the features**  
 → Read [README.md](README.md)
 
 ---

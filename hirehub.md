@@ -20,7 +20,7 @@ HireHub is a responsive job portal designed for college students to discover off
 |--------|---------|
 | Students can sign up & create profile | Profile page works with resume upload |
 | Jobs list displays clearly with filters | Search + filter returns correct results |
-| Job Detail page displays full information | “Apply Now” opens external link / tracks status |
+| Job Detail page displays full information | "Apply Now" opens external link / tracks status |
 | Admin can post/edit/delete jobs | Admin dashboard functional |
 | UI is responsive | Works on mobile, tablet, desktop |
 
@@ -111,9 +111,10 @@ Admin can:
   "resume_url": "uploads/resume.pdf",
   "about": "Computer Science student passionate about backend dev"
 }
-Job
-json
-Copy code
+```
+
+### **Job**
+```json
 {
   "job_id": 101,
   "title": "Software Intern",
@@ -124,77 +125,91 @@ Copy code
   "apply_link": "https://careers.google.com/apply",
   "last_date": "2025-03-15"
 }
-Saved Job
-json
-Copy code
+```
+
+### **Saved Job**
+```json
 {
   "user_id": 12,
   "job_id": 101
 }
-Application Record
-json
-Copy code
+```
+
+### **Application Record**
+```json
 {
   "user_id": 12,
   "job_id": 101,
   "applied_at": "2025-01-10T10:00:00"
 }
-10. API Design (Endpoints + Contracts)
-Method	Endpoint	Description
-GET	/jobs/	Get job list with search filters
-GET	/job/<id>/	Get job details
-POST	/profile/update/	Update user profile
-POST	/job/save/	Save job
-POST	/job/apply/	Record job application
-POST	/admin/job/add/	Add job (admin only)
-POST	/admin/job/edit/<id>/	Edit job
-DELETE	/admin/job/delete/<id>/	Delete job
+```
 
-11. Security & Admin Policy
-Role-based access control.
+---
 
-Admin pages require staff login.
+## 10. API Design (Endpoints + Contracts)
 
-File uploads sanitized.
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | /jobs/ | Get job list with search filters |
+| GET | /job/<id>/ | Get job details |
+| POST | /profile/update/ | Update user profile |
+| POST | /job/save/ | Save job |
+| POST | /job/apply/ | Record job application |
+| POST | /admin/job/add/ | Add job (admin only) |
+| POST | /admin/job/edit/<id>/ | Edit job |
+| DELETE | /admin/job/delete/<id>/ | Delete job |
 
-Prevent duplicate applications.
+---
 
-12. Resume & Eligibility Check
-Resume stored on server.
+## 11. Security & Admin Policy
+- Role-based access control.
+- Admin pages require staff login.
+- File uploads sanitized.
+- Prevent duplicate applications.
 
-System compares skill tags with job requirements.
+---
 
-UI display:
+## 12. Resume & Eligibility Check
+- Resume stored on server.
+- System compares skill tags with job requirements.
+- UI display:
+  - ✅ Match
+  - ⚠️ Partial Match
+  - ❌ Not Eligible
 
-✅ Match
+---
 
-⚠️ Partial Match
-
-❌ Not Eligible
-
-13. Receipts & Export
+## 13. Receipts & Export
 Admin can export:
+- Job Applicants CSV
+- Student Profile List CSV
 
-Job Applicants CSV
+---
 
-Student Profile List CSV
+## 14. Edge Cases & Validations
 
-14. Edge Cases & Validations
-Case	Handling
-Resume not uploaded	Prompt user to upload
-Empty job search	Display friendly “No results found”
-Invalid apply link	Validate URL format
+| Case | Handling |
+|------|----------|
+| Resume not uploaded | Prompt user to upload |
+| Empty job search | Display friendly "No results found" |
+| Invalid apply link | Validate URL format |
 
-15. Suggested Tech Stack & Architecture
-Layer	Technology
-Frontend	HTML + Tailwind CSS + Alpine.js (optional)
-Backend	Django / Django ORM
-Database	SQLite (development) → PostgreSQL (production)
-Deployment	PythonAnywhere / Railway / Vercel Edge (backend)
+---
 
-16. Setup & Development Notes
-bash
-Copy code
+## 15. Suggested Tech Stack & Architecture
+
+| Layer | Technology |
+|-------|------------|
+| Frontend | HTML + Tailwind CSS + Alpine.js (optional) |
+| Backend | Django / Django ORM |
+| Database | SQLite (development) → PostgreSQL (production) |
+| Deployment | PythonAnywhere / Railway / Vercel Edge (backend) |
+
+---
+
+## 16. Setup & Development Notes
+
+```bash
 git clone <repo>
 cd hirehub
 python -m venv env
@@ -202,20 +217,22 @@ env\Scripts\activate
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
-17. Tests & QA Suggestions
-Test search filters.
+```
 
-Test eligibility suggestion logic.
+---
 
-Test admin role restrictions.
+## 17. Tests & QA Suggestions
+- Test search filters.
+- Test eligibility suggestion logic.
+- Test admin role restrictions.
+- Test resume uploading on mobile and desktop.
 
-Test resume uploading on mobile and desktop.
+---
 
-18. Next Steps / Optional Features
-Email job alerts
+## 18. Next Steps / Optional Features
+- Email job alerts
+- AI resume scoring
+- Company verification badge
+- Real-time chat between recruiters & students
 
-AI resume scoring
-
-Company verification badge
-
-Real-time chat between recruiters & students
+---
