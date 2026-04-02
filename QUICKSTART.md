@@ -6,7 +6,7 @@ Get HireHub up and running in 5 minutes!
 
 - Python 3.8+ installed
 - Git installed
-- 10-15 minutes of your time ⏰
+- 5 minutes of your time ⏰
 
 ---
 
@@ -70,6 +70,8 @@ Open your browser and go to:
 
 - **Homepage**: http://127.0.0.1:8000/
 - **Admin Panel**: http://127.0.0.1:8000/admin/
+- **Student Dashboard**: http://127.0.0.1:8000/dashboard/
+- **Recruiter Dashboard**: http://127.0.0.1:8000/recruiter/dashboard/
 
 ---
 
