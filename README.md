@@ -371,6 +371,7 @@ git clone https://github.com/yourusername/hirehub.git
 
 # Navigate to project directory
 cd hirehub
+cd campusconnect
 ```
 
 ### Step 2: Set Up Virtual Environment
@@ -409,7 +410,7 @@ pip install pillow            # For image handling
 
 ### Step 4: Environment Configuration
 
-Create a `.env` file in the project root:
+Create a `.env` file in the project root (hirehub/):
 
 ```bash
 # Create .env file
@@ -456,9 +457,6 @@ MEDIA_ROOT=media/
 #### For SQLite (Development)
 
 ```bash
-# Navigate to project directory
-cd hirehub
-
 # Run migrations
 python manage.py makemigrations
 python manage.py migrate
@@ -523,7 +521,7 @@ Open your browser and navigate to:
 
 ### Settings Overview
 
-The project uses Django settings located in `hirehub/settings.py`:
+The project uses Django settings located in `campusconnect/settings.py`:
 
 ```python
 # Key configuration sections:
@@ -737,6 +735,7 @@ We welcome contributions to HireHub! Here's how you can help:
    ```bash
    git clone https://github.com/yourusername/hirehub.git
    cd hirehub
+   cd campusconnect
    ```
 
 3. **Create a Branch**
@@ -760,177 +759,24 @@ We welcome contributions to HireHub! Here's how you can help:
    git push origin feature/your-feature-name
    ```
 
-7. **Create Pull Request**
-   - Go to GitHub
-   - Click "New Pull Request"
-   - Describe your changes
-
-### Code Style Guidelines
-
-- Follow [PEP 8](https://pep8.org/) for Python code
-- Use meaningful variable and function names
-- Add docstrings to functions and classes
-- Keep functions small and focused
-- Write comments for complex logic
-
-### Commit Message Format
-
-```
-Type: Brief description
-
-Detailed explanation of what changed and why.
-
-Types: Add, Update, Fix, Remove, Refactor, Document
-```
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ---
 
 ## 📄 License
 
-```
-MIT License
-
-Copyright (c) 2025 HireHub
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
-### Third-Party Licenses
-
-This project uses the following open-source packages:
-
-- **Django** - BSD License
-- **TailwindCSS** - MIT License
-- **Alpine.js** - MIT License
-- **PostgreSQL** - PostgreSQL License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 📞 Support
+## 💬 Support
 
-### Getting Help
+For support and questions:
 
-- **Documentation**: You're reading it! 📚
-- **Issues**: [GitHub Issues](https://github.com/yourusername/hirehub/issues)
+- **GitHub Issues**: https://github.com/yourusername/hirehub/issues
 - **Email**: support@hirehub.com
-- **Community**: Join our [Discord](https://discord.gg/hirehub)
-
-### Reporting Bugs
-
-When reporting bugs, please include:
-
-1. **Description**: Clear description of the issue
-2. **Steps to Reproduce**: How to recreate the bug
-3. **Expected Behavior**: What should happen
-4. **Actual Behavior**: What actually happens
-5. **Environment**: 
-   - OS (Windows/Mac/Linux)
-   - Python version
-   - Django version
-   - Browser (if frontend issue)
-
-### Feature Requests
-
-Have an idea? We'd love to hear it!
-
-1. Check [existing issues](https://github.com/yourusername/hirehub/issues)
-2. Create new issue with "Feature Request" label
-3. Describe the feature and use case
-4. Explain why it would be valuable
+- **Documentation**: See [DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md)
 
 ---
-
-## 🙏 Acknowledgments
-
-Special thanks to:
-
-- Django community for the amazing framework
-- TailwindCSS for the beautiful styling
-- All contributors who help improve HireHub
-- Educational institutions using our platform
-
----
-
-## 📊 Project Statistics
-
-- **Lines of Code**: ~5,000+
-- **Templates**: 15+
-- **Models**: 4 core models
-- **Views**: 25+ view functions
-- **Languages**: Python, HTML, CSS, JavaScript
-- **Database**: PostgreSQL/SQLite
-
----
-
-## 🗺 Roadmap
-
-### Version 2.0 (Planned)
-
-- [ ] Real-time notifications
-- [ ] Chat system between recruiters and students
-- [ ] Advanced analytics dashboard
-- [ ] Resume builder tool
-- [ ] Interview scheduling system
-- [ ] Video interview integration
-- [ ] Mobile app (React Native)
-- [ ] API for third-party integrations
-
-### Future Enhancements
-
-- [ ] AI-powered skill matching
-- [ ] Automated resume parsing
-- [ ] Company profile pages
-- [ ] Job alerts via email/SMS
-- [ ] Multi-language support
-- [ ] Dark mode
-- [ ] Accessibility improvements (WCAG 2.1)
-
----
-
-## 📝 Changelog
-
-### Version 1.0.0 (Current)
-
-**Released: November 2025**
-
-#### Features
-- ✅ User authentication and authorization
-- ✅ Role-based dashboards (Student, Recruiter, Admin)
-- ✅ Job posting and management
-- ✅ Application tracking system
-- ✅ Skill matching algorithm
-- ✅ Professional resume viewing
-- ✅ Project showcase
-- ✅ Portfolio integration
-- ✅ Email notifications
-- ✅ Print-friendly resumes
-- ✅ Search and filtering
-- ✅ Admin approval system
-
----
-
-<div align="center">
 
 **Made with ❤️ by the HireHub Team**
-
-⭐ Star us on GitHub — it helps!
-
-[Website](https://hirehub.com) • [Documentation](https://docs.hirehub.com) • [Blog](https://blog.hirehub.com)
-
-</div>
